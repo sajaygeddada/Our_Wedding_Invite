@@ -1,0 +1,186 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    background-color: #111;
+}
+
+/* HERO SECTION */
+/* HERO SECTION */
+.hero {
+    position: relative;
+    height: 100vh;
+    background: url('assets/images/hero.jpg') no-repeat center 60%/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #ffffff;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    background: linear-gradient(to bottom, transparent, #0f0f0f);
+}
+
+
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 20px;
+}
+
+/* NAMES */
+.name-top,
+.name-bottom {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    letter-spacing: 6px;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    margin-bottom: 20px;
+}
+
+
+
+/* WEDS */
+.weds {
+    font-size: clamp(0.8rem, 1.5vw, 1.1rem);
+    letter-spacing: 12px;
+    margin: 15px 0;
+    color: #e6c79c;
+    opacity: 0.9;
+}
+
+
+/* TAGLINE */
+.tagline {
+    margin-top: 25px;
+    font-style: italic;
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    color: #f3d9b1;
+}
+
+/* DATE */
+.date {
+    margin-top: 12px;
+    letter-spacing: 5px;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* SCROLL INDICATOR */
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    font-size: 1.8rem;
+    animation: bounce 2s infinite;
+    z-index: 2;
+}
+
+/* BOUNCE ANIMATION */
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(8px);
+    }
+}
+
+
+/* GENERAL SECTIONS */
+section {
+    padding: 80px 20px;
+    text-align: center;
+    background: linear-gradient(to bottom, #f6f1ea, #efe7dd);
+    color: #2c2c2c;
+}
+
+
+section h2 {
+    color: #3a2f2f;
+}
+
+
+h2 {
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 20px;
+}
+
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.countdown div span {
+    font-size: 2rem;
+    display: block;
+}
+
+/* GALLERY */
+.slideshow {
+    position: relative;
+    max-width: 600px;
+    margin: auto;
+}
+
+.slide {
+    width: 100%;
+    display: none;
+}
+
+.slide.active {
+    display: block;
+}
+
+/* MUSIC BUTTON */
+#music-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: white;
+    color: black;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+/* FADE IN ANIMATION */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+html {
+    scroll-behavior: smooth;
+}
