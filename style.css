@@ -21,6 +21,17 @@ body {
     justify-content: center;
     text-align: center;
     color: #ffffff;
+    animation: heroZoom 12s ease-in-out infinite alternate;
+}
+
+@keyframes heroZoom {
+    from {
+        background-size: 100%;
+    }
+
+    to {
+        background-size: 110%;
+    }
 }
 
 .hero::after {
@@ -55,6 +66,7 @@ body {
     letter-spacing: 6px;
     text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
     margin-bottom: 20px;
+
 }
 
 
@@ -172,8 +184,8 @@ h2 {
 /* FADE IN ANIMATION */
 .reveal {
     opacity: 0;
-    transform: translateY(30px);
-    transition: all 1s ease;
+    transform: translateY(40px);
+    transition: all 1.2s ease;
 }
 
 .reveal.active {
@@ -183,4 +195,77 @@ h2 {
 
 html {
     scroll-behavior: smooth;
+}
+
+/* LOADER */
+
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #f6f2ec;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.loader-content {
+    text-align: center;
+}
+
+/* LOGO REVEAL */
+.logo {
+    width: 220px;
+    opacity: 0;
+    animation: logoReveal 2s ease forwards, glow 5s ease-in-out infinite;
+}
+
+/* GOLD GLOW EFFECT */
+@keyframes glow {
+    from {
+        filter: drop-shadow(0 0 5px GOLD);
+    }
+
+    to {
+        filter: drop-shadow(0 0 20px GOLD);
+    }
+}
+
+/* TEXT APPEARS AFTER LOGO */
+.loading-text {
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    margin-top: 22px;
+    color: #8c6b3f;
+    opacity: 0;
+    animation: textReveal 1s forwards;
+    animation-delay: 1.6s;
+}
+
+/* LOGO ANIMATION */
+@keyframes logoReveal {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* TEXT ANIMATION */
+@keyframes textReveal {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

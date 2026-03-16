@@ -1,3 +1,31 @@
+// LOADER
+// LOADER
+window.addEventListener("load", function () {
+
+    setTimeout(function () {
+
+        const loader = document.getElementById("loader");
+        loader.style.opacity = "0";
+
+        setTimeout(function () {
+
+            loader.style.display = "none";
+
+            /* START HERO REVEAL AFTER LOADER */
+            const reveals = document.querySelectorAll(".hero .reveal");
+
+            reveals.forEach((el, index) => {
+                setTimeout(() => {
+                    el.classList.add("active");
+                }, index * 300);
+            });
+
+        }, 600);
+
+    }, 4200);
+
+});
+
 // COUNTDOWN
 const weddingDate = new Date("April 12, 2026 00:00:00").getTime();
 
@@ -59,16 +87,7 @@ button.addEventListener("click", (e) => {
     }
 });
 
-// HERO LOAD ANIMATION
-window.addEventListener("load", () => {
-    const reveals = document.querySelectorAll(".hero .reveal");
 
-    reveals.forEach((el, index) => {
-        setTimeout(() => {
-            el.classList.add("active");
-        }, index * 300);
-    });
-});
 
 
 // SECTION REVEAL ON SCROLL
