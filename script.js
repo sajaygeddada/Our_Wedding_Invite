@@ -1,105 +1,199 @@
-// LOADER
-// LOADER
-window.addEventListener("load", function () {
+// ═══════════════════════════════════════════════
+// SAJAY WEDS AMRUSHA — script.js  "Dusk Bloom"
+// ═══════════════════════════════════════════════
 
-    setTimeout(function () {
-
-        const loader = document.getElementById("loader");
-        loader.style.opacity = "0";
-
-        setTimeout(function () {
-
-            loader.style.display = "none";
-
-            /* START HERO REVEAL AFTER LOADER */
-            const reveals = document.querySelectorAll(".hero .reveal");
-
-            reveals.forEach((el, index) => {
-                setTimeout(() => {
-                    el.classList.add("active");
-                }, index * 300);
-            });
-
-        }, 600);
-
-    }, 4200);
-
-});
-
-// COUNTDOWN
-const weddingDate = new Date("April 12, 2026 00:00:00").getTime();
-
-setInterval(() => {
-    const now = new Date().getTime();
-    const distance = weddingDate - now;
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    document.getElementById("days").innerText = days;
-    document.getElementById("hours").innerText = hours;
-    document.getElementById("minutes").innerText = minutes;
-    document.getElementById("seconds").innerText = seconds;
-
-}, 1000);
-
-
-// SLIDESHOW
-let slides = document.querySelectorAll(".slide");
-let current = 0;
-
-setInterval(() => {
-    slides[current].classList.remove("active");
-    current = (current + 1) % slides.length;
-    slides[current].classList.add("active");
-}, 4000);
-
-
-// MUSIC TOGGLE
-const music = document.getElementById("bg-music");
-const button = document.getElementById("music-btn");
-
-// Try autoplay on load
+// ── LOADER ──────────────────────────────────────
 window.addEventListener("load", () => {
-    const playPromise = music.play();
-
-    if (playPromise !== undefined) {
-        playPromise.catch(() => {
-            // Autoplay blocked — wait for interaction
-            const enableAudio = () => {
-                music.play();
-                document.removeEventListener("click", enableAudio);
-            };
-            document.addEventListener("click", enableAudio);
-        });
-    }
+  setTimeout(() => {
+    const loader = document.getElementById("loader");
+    loader.style.opacity = "0";
+    loader.style.pointerEvents = "none";
+    setTimeout(() => {
+      loader.style.display = "none";
+      revealHero();
+    }, 900);
+  }, 4000);
 });
 
-// Toggle button
-button.addEventListener("click", (e) => {
-    e.stopPropagation();
-    if (music.paused) {
-        music.play();
-    } else {
-        music.pause();
-    }
-});
+function revealHero() {
+  document.querySelectorAll(".hero .reveal").forEach((el, i) => {
+    setTimeout(() => el.classList.add("active"), i * 260);
+  });
+}
 
+// ── PARALLAX ────────────────────────────────────
+function handleParallax() {
+  const scrollY = window.scrollY;
+  document.querySelectorAll(".parallax-layer").forEach(layer => {
+    const speed = parseFloat(layer.dataset.speed || 0.2);
+    layer.style.transform = `translateY(${scrollY * speed}px)`;
+  });
+  // Hero text subtle upward parallax
+  const heroText = document.getElementById("p-text");
+  if (heroText) {
+    const speed = parseFloat(heroText.dataset.speed || 0.4);
+    heroText.style.transform = `translateY(${scrollY * speed}px)`;
+  }
+}
+window.addEventListener("scroll", handleParallax, { passive: true });
 
+// ── COUNTDOWN ───────────────────────────────────
+const weddingDate = new Date("April 12, 2026 10:30:00").getTime();
 
+function pad(n) { return String(n).padStart(2, "0"); }
 
-// SECTION REVEAL ON SCROLL
-const sectionReveals = document.querySelectorAll("section");
-
-window.addEventListener("scroll", () => {
-    sectionReveals.forEach(section => {
-        const sectionTop = section.getBoundingClientRect().top;
-        const triggerPoint = window.innerHeight - 100;
-
-        if (sectionTop < triggerPoint) {
-            section.classList.add("active");
-        }
+function updateCountdown() {
+  const diff = weddingDate - Date.now();
+  if (diff <= 0) {
+    ["days","hours","minutes","seconds"].forEach(id => {
+      document.getElementById(id).textContent = "00";
     });
+    return;
+  }
+  document.getElementById("days").textContent    = pad(Math.floor(diff / 86400000));
+  document.getElementById("hours").textContent   = pad(Math.floor((diff % 86400000) / 3600000));
+  document.getElementById("minutes").textContent = pad(Math.floor((diff % 3600000) / 60000));
+  document.getElementById("seconds").textContent = pad(Math.floor((diff % 60000) / 1000));
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// ── SCROLL REVEAL ────────────────────────────────
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("active");
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
+
+// ── GALLERY ──────────────────────────────────────
+let gCurrent = 0;
+const gSlides = document.querySelectorAll(".gallery-slide");
+const gDots   = document.querySelectorAll(".gdot");
+
+function gGoTo(n) {
+  gSlides[gCurrent].classList.remove("active");
+  gDots[gCurrent].classList.remove("active");
+  gCurrent = (n + gSlides.length) % gSlides.length;
+  gSlides[gCurrent].classList.add("active");
+  gDots[gCurrent].classList.add("active");
+}
+
+let gTimer = setInterval(() => gGoTo(gCurrent + 1), 4500);
+
+document.getElementById("galleryNext")?.addEventListener("click", () => {
+  clearInterval(gTimer);
+  gGoTo(gCurrent + 1);
+  gTimer = setInterval(() => gGoTo(gCurrent + 1), 4500);
+});
+document.getElementById("galleryPrev")?.addEventListener("click", () => {
+  clearInterval(gTimer);
+  gGoTo(gCurrent - 1);
+  gTimer = setInterval(() => gGoTo(gCurrent + 1), 4500);
+});
+gDots.forEach(dot => {
+  dot.addEventListener("click", () => {
+    clearInterval(gTimer);
+    gGoTo(parseInt(dot.dataset.index));
+    gTimer = setInterval(() => gGoTo(gCurrent + 1), 4500);
+  });
+});
+
+// ── FALLING PETALS (Canvas) ──────────────────────
+const canvas = document.getElementById("petals");
+const ctx    = canvas.getContext("2d");
+
+function resizeCanvas() {
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas, { passive: true });
+
+const PETAL_COLORS = [
+  "rgba(232,180,160,0.72)",
+  "rgba(200,148,90,0.6)",
+  "rgba(240,192,112,0.55)",
+  "rgba(224,160,120,0.65)",
+  "rgba(245,237,224,0.5)",
+];
+
+const NUM_PETALS = 28;
+const petals = [];
+
+for (let i = 0; i < NUM_PETALS; i++) {
+  petals.push({
+    x:      Math.random() * window.innerWidth,
+    y:      Math.random() * -window.innerHeight,
+    size:   6 + Math.random() * 12,
+    speedY: 0.5 + Math.random() * 1.2,
+    speedX: (Math.random() - 0.5) * 0.6,
+    rot:    Math.random() * Math.PI * 2,
+    rotV:   (Math.random() - 0.5) * 0.025,
+    sway:   Math.random() * Math.PI * 2,
+    swayS:  0.008 + Math.random() * 0.012,
+    color:  PETAL_COLORS[Math.floor(Math.random() * PETAL_COLORS.length)],
+    opacity: 0.4 + Math.random() * 0.6,
+  });
+}
+
+function drawPetal(p) {
+  ctx.save();
+  ctx.translate(p.x, p.y);
+  ctx.rotate(p.rot);
+  ctx.globalAlpha = p.opacity;
+  ctx.fillStyle = p.color;
+  ctx.beginPath();
+  // Simple petal shape: two bezier curves
+  ctx.moveTo(0, 0);
+  ctx.bezierCurveTo( p.size, -p.size * 0.5,  p.size * 1.2,  p.size * 0.8, 0, p.size * 1.4);
+  ctx.bezierCurveTo(-p.size * 1.2, p.size * 0.8, -p.size, -p.size * 0.5, 0, 0);
+  ctx.fill();
+  ctx.restore();
+}
+
+function animatePetals() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  petals.forEach(p => {
+    p.sway += p.swayS;
+    p.x    += p.speedX + Math.sin(p.sway) * 0.5;
+    p.y    += p.speedY;
+    p.rot  += p.rotV;
+
+    if (p.y > canvas.height + 30) {
+      p.y = -20;
+      p.x = Math.random() * canvas.width;
+    }
+    drawPetal(p);
+  });
+  requestAnimationFrame(animatePetals);
+}
+animatePetals();
+
+// ── MUSIC ─────────────────────────────────────────
+const music     = document.getElementById("bg-music");
+const musicBtn  = document.getElementById("music-btn");
+const iconPlay  = document.getElementById("icon-play");
+const iconPause = document.getElementById("icon-pause");
+
+function syncMusicIcon() {
+  iconPlay.style.display  = music.paused ? "block" : "none";
+  iconPause.style.display = music.paused ? "none"  : "block";
+}
+
+window.addEventListener("load", () => {
+  music.play().then(syncMusicIcon).catch(() => {
+    syncMusicIcon();
+    const go = () => { music.play().then(syncMusicIcon); document.removeEventListener("click", go); };
+    document.addEventListener("click", go);
+  });
+});
+
+musicBtn.addEventListener("click", e => {
+  e.stopPropagation();
+  music.paused ? music.play().then(syncMusicIcon) : (music.pause(), syncMusicIcon());
 });
