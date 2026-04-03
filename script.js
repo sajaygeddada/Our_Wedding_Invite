@@ -38,7 +38,7 @@ function handleParallax() {
 window.addEventListener("scroll", handleParallax, { passive: true });
 
 // ── COUNTDOWN ───────────────────────────────────
-const weddingDate = new Date("April 12, 2026 10:30:00").getTime();
+const weddingDate = new Date("April 29, 2026 07:30:00").getTime();
 
 function pad(n) { return String(n).padStart(2, "0"); }
 
