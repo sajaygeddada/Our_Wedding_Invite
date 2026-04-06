@@ -151,8 +151,9 @@ body {
 .hero-eyebrow {
   font-family: 'Cormorant', serif;
   font-style: italic; font-size: clamp(0.85rem, 1.6vw, 1.05rem);
-  letter-spacing: 3px; color: var(--terra-lt);
-  opacity: 0.85;
+  letter-spacing: 3px; color: var(--ivory);
+  opacity: 0.92;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.55);
 }
 
 .hero-name {
@@ -188,8 +189,10 @@ body {
 .hero-date {
   font-family: 'Cinzel Decorative', serif;
   font-size: clamp(0.62rem, 1.2vw, 0.82rem);
-  letter-spacing: 5px; color: var(--terra-lt);
+  letter-spacing: 5px; color: var(--ivory);
   margin-top: 8px;
+  text-shadow: 0 1px 10px rgba(0,0,0,0.6);
+  opacity: 0.95;
 }
 
 .hero-scroll {
@@ -200,8 +203,9 @@ body {
 .scroll-label {
   font-family: 'Cormorant', serif;
   font-size: 0.78rem; letter-spacing: 3px;
-  color: var(--terra-lt); opacity: 0.6;
+  color: var(--ivory); opacity: 0.75;
   text-transform: uppercase;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.6);
 }
 .scroll-arrow {
   font-size: 1.2rem; color: var(--gold);
@@ -298,7 +302,9 @@ section { position: relative; padding: 100px 24px; text-align: center; overflow:
 .count-unit {
   font-family: 'Cinzel Decorative', serif;
   font-size: 0.55rem; letter-spacing: 4px;
-  color: var(--terra); text-transform: uppercase;
+  color: var(--terra-lt); text-transform: uppercase;
+  opacity: 0.9;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.5);
 }
 
 /* ── STORY ────────────────────────────────────────── */
@@ -375,7 +381,8 @@ section { position: relative; padding: 100px 24px; text-align: center; overflow:
 .tile-label {
   font-family: 'Cinzel Decorative', serif;
   font-size: 0.55rem; letter-spacing: 4px;
-  color: var(--terra); text-transform: uppercase;
+  color: var(--gold); text-transform: uppercase;
+  opacity: 0.85;
 }
 .tile-value {
   font-family: 'Playfair Display', serif;
@@ -385,8 +392,8 @@ section { position: relative; padding: 100px 24px; text-align: center; overflow:
 }
 .tile-sub {
   font-family: 'Cormorant', serif;
-  font-size: 0.9rem; color: var(--terra-lt);
-  font-style: italic; opacity: 0.7;
+  font-size: 0.9rem; color: var(--ivory-dk);
+  font-style: italic; opacity: 0.85;
 }
 
 .map-btn {
@@ -496,8 +503,9 @@ section { position: relative; padding: 100px 24px; text-align: center; overflow:
 .closing-eyebrow {
   font-family: 'Cormorant', serif;
   font-style: italic; font-size: 1rem;
-  letter-spacing: 4px; color: var(--terra-lt);
-  opacity: 0.75;
+  letter-spacing: 4px; color: var(--ivory);
+  opacity: 0.9;
+  text-shadow: 0 1px 10px rgba(0,0,0,0.5);
 }
 .closing-names {
   font-family: 'Playfair Display', serif;
@@ -510,8 +518,10 @@ section { position: relative; padding: 100px 24px; text-align: center; overflow:
 .closing-date-text {
   font-family: 'Cinzel Decorative', serif;
   font-size: clamp(0.6rem, 1.2vw, 0.75rem);
-  letter-spacing: 4px; color: var(--terra);
+  letter-spacing: 4px; color: var(--gold);
   margin-top: 4px;
+  text-shadow: 0 1px 10px rgba(0,0,0,0.5);
+  opacity: 0.95;
 }
 .closing-ornament { margin-top: 8px; }
 
